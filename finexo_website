@@ -5,3 +5,4 @@ sudo apt install unzip -y
 cd /tmp
 wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
 unzip finexo.zip
+sudo
