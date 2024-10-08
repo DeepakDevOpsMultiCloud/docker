@@ -23,3 +23,8 @@ docker container cp /tmp/finexo-html crypto-manual:/usr/share/nginx/html/hello
 #access it from browser
 ipaddress:containername/hello/
 
+#to create docker image from running container 
+docker container commit crypto-manual web:1.0
+#run from existing docker image
+docker container run --name firstc -d -P web:1.0  
+
