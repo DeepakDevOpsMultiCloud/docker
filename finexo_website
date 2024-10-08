@@ -5,4 +5,20 @@ sudo apt install unzip -y
 cd /tmp
 wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
 unzip finexo.zip
+#to access it over web
+sudo mv /tmp/finexo-html /var/www/html/crypto
+
+
+#........................................................
+sudo apt update
+sudo install unzip -y
+cd /tmp
+wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
+docker container run -d -P --name crypto-manual nginx
+
+#from local machine to docker container
+docker container cp /tmp/finexo-html crypto-manual:/usr/share/nginx/html/hello
+
+#access it from browser
+ipaddress:containername/hello/
 
