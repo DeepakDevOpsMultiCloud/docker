@@ -8,18 +8,6 @@ unzip finexo.zip
 #to access it over web
 sudo mv /tmp/finexo-html /var/www/html/crypto
 
- its Docker file 
-FROM nginx:latest
-RUN apt update && \
-    apt install unzip -y && \
-    apt install wget -y
-WORKDIR /tmp
-RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip && \
-    unzip finexo.zip && \
-    mv /tmp/finexo-html /usr/share/nginx/html/findthewebsite
-
-access it from 
-  ipaddress:containerport/findthewebsite/
 
 #........................................................
 sudo apt update
@@ -39,4 +27,21 @@ ipaddress:containername/hello/
 docker container commit crypto-manual web:1.0
 #run from existing docker image
 docker container run --name firstc -d -P web:1.0  
+
+
+
+
+
+ its Docker file 
+FROM nginx:latest
+RUN apt update && \
+    apt install unzip -y && \
+    apt install wget -y
+WORKDIR /tmp
+RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip && \
+    unzip finexo.zip && \
+    mv /tmp/finexo-html /usr/share/nginx/html/findthewebsite
+
+access it from 
+  ipaddress:containerport/findthewebsite/
 
