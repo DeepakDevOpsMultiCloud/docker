@@ -1,13 +1,13 @@
-FROM jenkins/jenkins:lts
-
-# Switch to root user to perform administrative tasks
+FROM cimg/openjdk:17.0
+LABEL author="Deepak"
 USER root
-
-# Grant Jenkins user passwordless sudo access
-RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-
-# Switch back to the Jenkins user
-USER jenkins
-
-# Define default working directory
-WORKDIR /var/jenkins_home
+RUN apt-get update && \
+    apt install -y wget 
+RUN wget -O /usr/share/keyrings/jenkins-keyring.asc \
+    https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key && \
+    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+    https://pkg.jenkins.io/debian-stable binary/ | tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null && \
+    apt-get update && \
+    apt-get install -y jenkins
+EXPOSE 8080
