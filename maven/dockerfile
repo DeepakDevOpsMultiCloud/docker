@@ -12,3 +12,6 @@ ENV  M2_HOME="/usr/share/maven/apache-maven-3.9.9"
 ENV  PATH="$M2_HOME/bin:$PATH"
 CMD ["sh", "-c", "java -version && mvn -version"]   
 
+
+# docker container run -it --name deepak maven:1.0 /bin/bash
+# Run in Interactive mode so that container won't go into exited state
