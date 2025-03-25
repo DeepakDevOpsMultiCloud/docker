@@ -1,1 +1,1 @@
-![](./JenkinsApp/Images/Docker.png)
+![](./Installation/Images/Docker.png)
