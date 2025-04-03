@@ -1,0 +1,14 @@
+FROM ubuntu:22.04 AS build
+LABEL buildedby="Developer"
+RUN apt update && \
+    apt install openjdk-17-jdk -y && \
+    apt install wget -y && \
+    apt install curl -y && \
+    cd /tmp && \
+    # its better to install the tar/zip file via RUN instruction not by using ADD
+    wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz  && \ 
+    tar -xvzf apache-maven-3.9.9-bin.tar.gz && \
+    mv apache-maven-3.9.9 /opt/maven 
+ENV DIR="/opt/maven"
+ENV PATH="$DIR/bin:$PATH"
+CMD ["sh", "-c", "java -version && mvn -version"]
