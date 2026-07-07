@@ -39,11 +39,13 @@ Removing intermediate container 109d8ed6845f
 -------------------
 sh is basic 
 standard Unix shell.
-
+default
 
 
 bash is advanced 
 Bourne Again Shell.
+advanced 
+
 
 | Feature                      | `/bin/sh`      | `/bin/bash`           |
 | ---------------------------- | -------------- | --------------------- |
@@ -54,6 +56,7 @@ Bourne Again Shell.
 | Auto-completion              | No             | Yes (interactive)     |
 | Best for                     | Simple scripts | Complex scripts       |
 
+--------------
+/bin/sh is the default shell Docker uses to execute shell-form instructions like RUN. It is lightweight and available on almost all Linux distributions. /bin/bash is a more feature-rich shell that supports advanced scripting features such as arrays, brace expansion, and enhanced conditional expressions
 
-
-
+--------
