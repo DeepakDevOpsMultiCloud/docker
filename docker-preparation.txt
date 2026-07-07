@@ -1,1 +1,59 @@
 docker preparation
+
+If the same environment variable is defined in both the Dockerfile and the docker-compose.yml, the value from docker-compose.yml overrides the value from the Dockerfile.
+
+Run instruction executed shell commands depending upon the OS.image used in From base image.
+
+- docker file is part of application code. 
+
+
+
+
+-------------------
+
+
+Step 3/5 : RUN mkdir -p /home/app
+ ---> Running in 109d8ed6845f
+ ---> d1676988c5ef
+Removing intermediate container 109d8ed6845f
+
+Here's what happened:
+
+Docker created a temporary container with ID:
+
+109d8ed6845f
+
+Inside that container it ran:
+
+mkdir -p /home/app
+
+After the command completed, Docker committed the changes as a new image layer:
+
+d1676988c5ef
+
+The temporary container was no longer needed, so Docker removed it:
+
+Removing intermediate container 109d8ed6845f
+
+
+-------------------
+sh is basic 
+standard Unix shell.
+
+
+
+bash is advanced 
+Bourne Again Shell.
+
+| Feature                      | `/bin/sh`      | `/bin/bash`           |
+| ---------------------------- | -------------- | --------------------- |
+| Speed                        | Faster         | Slightly slower       |
+| Memory usage                 | Low            | Higher                ||
+| Arrays                       | ❌ No           | ✅ Yes                 ||
+| Advanced string manipulation | Limited        | Powerful              |
+| Auto-completion              | No             | Yes (interactive)     |
+| Best for                     | Simple scripts | Complex scripts       |
+
+
+
+
