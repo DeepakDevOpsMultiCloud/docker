@@ -60,3 +60,24 @@ advanced
 /bin/sh is the default shell Docker uses to execute shell-form instructions like RUN. It is lightweight and available on almost all Linux distributions. /bin/bash is a more feature-rich shell that supports advanced scripting features such as arrays, brace expansion, and enhanced conditional expressions
 
 --------
+- JavaScript is a programming language, same like python
+- programming language needs a runtime (or engine) to execute its code.
+- Node.js is a runtime environment that allows JavaScript to run outside a web browser.
+- Before Node.js existed, JavaScript could only run inside web browsers.
+- After Node.js, Now JavaScript can run on your computer without a browser.
+
+
+
+------------
+JavaScript is just a programming language. 
+Whether it's used for the frontend or backend depends on where it runs.
+
+When JavaScript runs inside a web browser, it is used for the frontend.
+- Validate a login form
+- Update a webpage without reloading
+
+When JavaScript runs using Node.js, it is used for the backend
+- Create REST APIs
+- Connect to a database
+- Authenticate users
+
