@@ -81,3 +81,178 @@ When JavaScript runs using Node.js, it is used for the backend
 - Connect to a database
 - Authenticate users
 
+-----------------
+
+
+Why are containers faster than VMs?
+
+Answer: Containers share the host operating system kernel. They don't need to boot a complete guest operating system, so startup time and resource usage are much lower.
+
+
+-------
+even in docker image pull, Docker Deamon downloads only the missing layers. --
+so common layers can be reused by multiple images, saving bandwidth and disk space.
+-------
+Can we create an image from a running container?
+
+
+Yes. Docker provides the docker commit command, which creates a new image from a container's current filesystem, including changes made in its writable layer.
+
+------
+Docker containers use the host machine's CPU.
+----
+
+
+Types of namespaces in Docker 
+
+| Namespace | Isolates                                             |
+| --------- | ---------------------------------------------------- |
+| PID       | Processes                                            |
+| Network   | Network interfaces, IP address, routing table, ports |Namespace ID #205
+| Mount     | Filesystem and mount points                          |Namespace ID #309
+| IPC       | Shared memory, semaphores, message queues            |Namespace ID #412
+| UTS       | Hostname and domain name                             |
+
+-------
+
+What happens when you run docker run nginx?
+
+
+docker run nginx
+Docker CLI sends the request to the Docker Daemon.
+The daemon checks if the nginx image exists locally.
+If not, it pulls the image from Docker Hub.
+Image layers are downloaded.
+A writable layer is added on top of the image.
+Linux namespaces are created.
+Cgroups are applied to limit resources.
+A network interface is attached.
+The container filesystem is mounted.
+ENTRYPOINT and CMD are executed.
+The Nginx process starts.
+The container is now running.
+
+
+You
+ │
+ ▼
+docker run nginx
+ │
+ ▼
+Docker CLI
+ │
+ ▼
+dockerd
+ │
+ ├── Check local image
+ │
+ ├── Pull image (if needed)
+ │
+ ├── Create writable layer
+ │
+ ▼
+containerd
+ │
+ ▼
+runc
+ │
+ ├── Create namespaces
+ ├── Apply cgroups
+ ├── Configure networking
+ ├── Mount filesystem
+ ├── Start ENTRYPOINT/CMD
+ │
+ ▼
+Linux Kernel
+ │
+ ▼
+Nginx starts as PID 1
+ │
+ ▼
+Container Running
+
+
+
+---------
+docker container lifecycle
+
+                 docker create
+                      │
+                      ▼
+                 Created
+                      │
+              docker start
+                      │
+                      ▼
+                 Running
+                /    |     \
+               /     |      \
+      docker pause   |   Process exits
+             │       |          │
+             ▼       |          ▼
+          Paused     |      Exited (Stopped)
+             │       |          │
+ docker unpause      |          │
+             │       |          │
+             └──────►│          │
+                     ▼          │
+                 Running        │
+                                │
+                     docker restart
+                                │
+                                ▼
+                            Running
+                                │
+                     docker rm (must be stopped)
+                                ▼
+                             Deleted
+
+
+-----------------
+Docker lifecycle
+
+Dockerfile
+      ↓
+docker build
+      ↓
+Docker Image
+      ↓
+docker run
+      ↓
+Container
+      ↓
+docker stop
+      ↓
+Stopped Container
+      ↓
+docker rm
+      ↓
+Deleted
+
+--------------
+docker container states.
+
+| State                | Description                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------- |
+| **Created**          | Container has been created but the main process hasn't started yet.                          |
+| **Running**          | The application's main process is executing.                                                 |
+| **Paused**           | All processes are temporarily frozen.                                                        |
+| **Exited (Stopped)** | The main process has stopped, but the container still exists.                                |
+| **Restarting**       | Docker is stopping and starting the container again (or retrying based on a restart policy). |
+| **Removed**          | The container has been deleted.                                                              |
+
+
+--------
+Docker does not boot or reboot an operating system when a docker container starts, it simply uses the host os. so it is faster.
+
+
+-------
+Many Docker CLI clients can communicate with a single Docker Daemon using the Docker REST API.
+-------
+sudo systemctl start docker it starts docker daemon
+------
+Namespaces are not created by Docker directly. Docker delegates container creation to containerd, which invokes runc. runc asks the Linux kernel to create namespaces, providing process, network, mount, IPC, UTS, and optional user isolation.
+
+-------
+runc applies cgroups when creating the container.
+------
