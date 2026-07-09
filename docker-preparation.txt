@@ -1,3 +1,24 @@
+| Chapter | Topic                                       | Level |
+| ------- | ------------------------------------------- | ----- |
+| 1       | Docker Fundamentals & Architecture          | ⭐     |
+| 2       | Docker Installation & Components            | ⭐     |
+| 3       | Docker Images & Containers                  | ⭐     |
+| 4       | Dockerfile (Every Instruction)              | ⭐⭐    |
+| 5       | Docker Volumes                              | ⭐⭐    |
+| 6       | Docker Networking                           | ⭐⭐⭐   |
+| 7       | Docker Compose                              | ⭐⭐⭐   |
+| 8       | Docker Registry (Docker Hub, ECR, ACR, GCR) | ⭐⭐⭐   |
+| 9       | Multi-stage Builds & Image Optimization     | ⭐⭐⭐   |
+| 10      | Docker Security                             | ⭐⭐⭐   |
+| 11      | Docker Logs & Monitoring                    | ⭐⭐⭐   |
+| 12      | Docker Troubleshooting                      | ⭐⭐⭐⭐  |
+| 13      | Real-Time Production Scenarios              | ⭐⭐⭐⭐  |
+| 14      | CI/CD with Docker                           | ⭐⭐⭐⭐  |
+| 15      | Docker + Kubernetes                         | ⭐⭐⭐⭐  |
+| 16      | 100 Most Asked Docker Interview Questions   | ⭐⭐⭐⭐  |
+| 17      | Complete Mock Interview                     | ⭐⭐⭐⭐⭐ |
+----------
+
 docker preparation
 
 If the same environment variable is defined in both the Dockerfile and the docker-compose.yml, the value from docker-compose.yml overrides the value from the Dockerfile.
@@ -256,3 +277,10 @@ Namespaces are not created by Docker directly. Docker delegates container creati
 -------
 runc applies cgroups when creating the container.
 ------
+What happens if dockerd crashes while containers are already running?
+Existing containers usually continue running.
+
+-------
+docker run [OPTIONS] IMAGE [COMMAND] [ARGUMENTS]
+docker command syntax
+--
