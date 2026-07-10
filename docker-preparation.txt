@@ -19,6 +19,7 @@
 | 17      | Complete Mock Interview                     | ⭐⭐⭐⭐⭐ |
 ----------
 
+
 docker preparation
 
 If the same environment variable is defined in both the Dockerfile and the docker-compose.yml, the value from docker-compose.yml overrides the value from the Dockerfile.
@@ -284,3 +285,23 @@ Existing containers usually continue running.
 docker run [OPTIONS] IMAGE [COMMAND] [ARGUMENTS]
 docker command syntax
 --
+Docker images are immutable (read-only), we can't modify docker images.
+
+--------
+| Image          | Container                      |
+| -------------- | ------------------------------ |
+| Read-only      | Read-write                     |
+| Template       | Running instance               |
+| Stored on disk | Uses memory + writable layer   |
+| Immutable      | State can change while running |
+| Built once     | Created many times             |
+
+-----
+Docker pulls only the layers that are missing on your local machine.
+--
+docker create only creates container not runs it. 
+--
+What happens if you delete an image used by a container?
+the image will get untagged and deleted, while the container will be still running even if it is restarted or stop and start. 
+
+--------
