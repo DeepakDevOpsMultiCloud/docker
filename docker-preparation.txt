@@ -362,3 +362,58 @@ how can we reduce docker image size
 -----
 Anonymous volume: Docker generates a random name,
 ---
+Docker does not allow you to attach a new volume to an already running (or even stopped) container.
+----
+1. Named volume ✅
+docker run -v firstvol:/data nginx
+Volume: firstvol     host path /var/lib/docker/volumes/firstvol - deafault
+Mount point: /data   container path /data
+
+2. Anonymous volume ✅
+docker run -v /data nginx
+Docker creates a random volume name. anonymous volume id 
+Mount point: /data
+
+-----------
+Docker volumes are just mounted filesystems.
+
+Docker does not provide:
+
+File locking             - it means docker wont lock the file if same volume is used by 2 different containers and allows to write into it. generally the last exited edited file is updated. 
+Conflict resolution
+Version control
+Transaction handling
+
+-----
+12. Difference between -v and --mount
+
+-v
+-v myvol:/data
+
+--mount
+--mount source=myvol,target=/data,type=volume
+
+Preferred in production because it is more explicit and easier to read.
+----
+13. Backup a Volume
+
+Example:
+
+docker run --rm \
+-v postgres-data:/data \
+-v $(pwd):/backup \
+ubuntu \
+tar czf /backup/postgres-backup.tar.gz /data
+
+The backup archive is created on the host.
+
+Restore
+docker run --rm \
+-v postgres-data:/data \
+-v $(pwd):/backup \
+ubuntu \
+tar xzf /backup/postgres-backup.tar.gz -C /
+
+Always validate restore procedures before relying on them.
+
+-------
