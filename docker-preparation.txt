@@ -305,3 +305,60 @@ What happens if you delete an image used by a container?
 the image will get untagged and deleted, while the container will be still running even if it is restarted or stop and start. 
 
 --------
+Does RUN execute when the container starts?
+No.
+RUN executes only during docker buildas a temperary container is created and installations is done then it forms as a image layer, temperory container got removed. this image layer is present in builded docker image and this is used by docker container during creation 
+
+why ?
+if run instrctions is executied duting container creation,
+Containers would take minutes to start instead of seconds.
+Docker avoids this by doing all installation work once during image build.
+
+--------
+LABEL author="deepak" maintainer="owner"
+        or 
+LABEL author="deepak"
+LABEL maintainer="owner"
+
+
+------
+ARG is built time variable it is not available in container running time.
+----
+Docker marks the container as unhealthy. By itself, Docker does not automatically restart the container based on health status. Restart behavior depends on restart policies or an orchestrator such as Docker Compose, Swarm, or Kubernetes.
+but in ECS it is different, In Amazon ECS, if a container fails its health checks, ECS can stop the unhealthy task and launch a new replacement task to maintain the desired task count.
+
+----
+FROM eclipse-tumerin:17-jdk
+LABEL maintainer="Deepak"
+ENV location=/opt/
+WORKDIR ${location}
+COPY pom.xml .
+RUN apt update && apt-get install -y maven
+COPY src src/
+RUN maven clean package
+RUN useradd -m appuser
+USER appuser
+EXPOSE 8080 
+ENTRYPOINT ["java" "-jar"]
+CMD ["targets/spring.jar"]
+
+
+--------
+why this is given uner entrypoint not in cmd 
+java -jar app.jar
+Your application should always run the same command.
+You don't expect users to replace the command by docker run command.
+
+-----
+Alpine Linux is a lightweight Linux distribution designed for security, simplicity, and small size
+---
+how can we reduce docker image size
+- combine multiple run instrcutions into one .
+- use small alpine image as base image
+- use multi-stage docker file
+- use .dockerignore file 
+- avaoid copying un-necessary file from build to runtime image. 
+
+-----
+Anonymous volume: Docker generates a random name,
+---
