@@ -474,3 +474,31 @@ Internet
 Docker uses NAT on the host, and then your router performs NAT again. To the internet, the request appears to come from the router's public IP.
 
 ---------
+With an Overlay Network
+containers can communicate even if they are present in different servers .
+                 Overlay Network (my-overlay)
+     ------------------------------------------------
+
+     Server 1                           Server 2
++--------------------+             +--------------------+
+| Frontend           | ----------> | PostgreSQL         |
+| Backend            | ----------> | Redis              |
++--------------------+             +--------------------+
+
+--------
+A standalone application is an application that can run independently on a single machine without depending on other services or applications.
+----
+Internet
+    │
+Home Router
+192.168.1.1
+    │
+Chromebook
+192.168.1.20
+    │
+ChromeOS VM Network
+100.115.92.194   ← Penguin Linux
+    │
+Docker
+
+
