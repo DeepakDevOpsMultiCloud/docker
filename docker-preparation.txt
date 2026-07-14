@@ -418,3 +418,59 @@ tar xzf /backup/postgres-backup.tar.gz -C /
 Always validate restore procedures before relying on them.
 
 -------
+                Host Machine
+        +-------------------------+
+        |      docker0 Bridge     |  (172.17.0.1)
+        +-------------------------+
+            |               |
+            |               |
+     Container A      Container B
+      172.17.0.2       172.17.0.3
+
+---------
+
+s docker0 the same as the bridge network?
+
+They are related, but not exactly the same.
+
+bridge = Docker's logical network (what you see with docker network ls)
+docker0 = The Linux bridge interface that implements the default bridge network.
+
+-----
+                Internet
+                    │
+             Public IP
+           49.x.x.x (ISP)
+                    │
+              Wi-Fi Router
+          (Performs NAT)
+                    │
+      ┌─────────────┼─────────────┐
+      │             │             │
+Laptop        Phone         Smart TV
+192.168.1.10  192.168.1.20  192.168.1.30
+
+---
+How does a container access the Internet?
+
+Suppose Container 1 wants to access google.com.
+
+The packet flows like this:
+
+Container (172.17.0.2)
+        │
+        ▼
+docker0 (172.17.0.1)   Docker NAT happens here
+        │
+        ▼
+Host (192.168.1.10)
+        │
+        ▼
+Router (Public IP: 49.204.100.50) Router NAT happens here
+        │
+        ▼
+Internet
+
+Docker uses NAT on the host, and then your router performs NAT again. To the internet, the request appears to come from the router's public IP.
+
+---------
