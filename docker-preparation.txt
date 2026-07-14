@@ -20,6 +20,7 @@
 ----------
 
 
+
 docker preparation
 
 If the same environment variable is defined in both the Dockerfile and the docker-compose.yml, the value from docker-compose.yml overrides the value from the Dockerfile.
