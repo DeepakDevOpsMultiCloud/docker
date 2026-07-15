@@ -502,3 +502,18 @@ ChromeOS VM Network
 Docker
 
 
+-----
+a single container can connect to multilpe networks
+........
+✅ 0 → Successful completion
+❌ 1 → Generic application error
+⚠️ 2 → Incorrect command usage
+🔒 126 → Permission denied
+🔍 127 → Command not found
+💥 134 → Process aborted (SIGABRT)
+🧠 137 → OOMKilled (memory limit exceeded)
+✋ 143 → Graceful shutdown (SIGTERM)
+🚨 255 → Unexpected failure
+
+--
+
