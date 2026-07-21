@@ -517,3 +517,20 @@ a single container can connect to multilpe networks
 
 --
 
+| Exit Code | Meaning                 | Short Explanation                                                                                           |
+| --------- | ----------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **0**     | Success                 | Container completed successfully without errors.                                                            |
+| **1**     | General Error           | Application failed due to a generic error.                                                                  |
+| **2**     | Misuse of Shell Command | Invalid command or incorrect shell usage.                                                                   |
+| **125**   | Docker Run Failed       | Docker itself couldn't start the container (e.g., invalid Docker options).                                  |
+| **126**   | Command Cannot Execute  | File exists but isn't executable (permission issue).                                                        |
+| **127**   | Command Not Found       | The specified command doesn't exist inside the container.                                                   |
+| **128**   | Invalid Exit Argument   | Invalid argument or fatal error before execution.                                                           |
+| **130**   | Interrupted (Ctrl+C)    | Container stopped by `SIGINT` (Ctrl+C).                                                                     |
+| **137**   | Killed (SIGKILL)        | Container was forcefully killed (`docker kill`) or terminated by the OOM Killer due to insufficient memory. |
+| **139**   | Segmentation Fault      | Application accessed invalid memory and crashed.                                                            |
+| **143**   | Graceful Stop           | Container received `SIGTERM` (e.g., `docker stop`) and exited gracefully.                                   |
+| **255**   | Unknown Error           | Application exited with an unspecified or severe error.                                                     |
+
+
+
